@@ -3,9 +3,18 @@ package com.educandoweb.webservice.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity //MAPEAMENTO DO JPA
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id   //INDICAR A CHAVE PRIMARIA
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
