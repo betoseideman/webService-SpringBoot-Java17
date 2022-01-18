@@ -1,20 +1,34 @@
 package com.educandoweb.webservice.resources;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educandoweb.webservice.entities.User;
+import com.educandoweb.webservice.services.UserService;
 
 @RestController
 @RequestMapping(value="/users")
 public class UserResource {
 	
+	@Autowired
+	private UserService service;
+	
 	@GetMapping //GET do HTTP
-	public ResponseEntity<User> findAll(){         //TIPO QUE RETORNA RESPOSTAS
-		User u = new User(1L, "Maria", "maria@gmail.com", "99999999", "123466");
-		return ResponseEntity.ok().body(u);
+	public ResponseEntity<List<User>> findAll(){         //TIPO QUE RETORNA RESPOSTAS
+		List<User> list = service.findAll(); 
+		return ResponseEntity.ok().body(list);
 	}
+	@GetMapping(value="/{id}") //PASSAR O VALOR DO ID, TERA UM PARAMETRO
+	public ResponseEntity<User> findById(@PathVariable Long id){ // PARA ACEITAR O PARAMENTRO COLOCAR ANOTAÇÃO
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 
 }
