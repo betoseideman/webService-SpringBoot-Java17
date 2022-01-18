@@ -33,13 +33,14 @@ public class OrderItem implements Serializable{
 		this.quantity = quantity;
 		this.price = price;
 	}
-	@JsonIgnore											//JSON IGNORE
+	@JsonIgnore											//JSON IGNORE PREVINIR LOOP INFINITO
 	public Order getOrder() {
 		return id.getOrder();
 	}
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
+	
 	public Product getProduct() {
 		return id.getProduct();
 	}
