@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.webservice.entities.User;
 import com.educandoweb.webservice.repositories.UserRepository;
+import com.educandoweb.webservice.services.exceptions.ResourceNotFoundException;
 
 @Service //REGISTRA A CLASSE COMO COMPONENTE DO SPRING
 public class UserService {
@@ -20,7 +21,7 @@ public class UserService {
 	}
 	public User findById(Long id) {
 		Optional<User> obj = repositoy.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id) );
 	}
 	public User insert(User obj) {
 		return repositoy.save(obj);
